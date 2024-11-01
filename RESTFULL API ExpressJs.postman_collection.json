@@ -12,7 +12,20 @@
 			"item": [
 				{
 					"name": "List Book",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -30,11 +43,26 @@
 				{
 					"name": "Store Book",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{basicAuthPassword}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{basicAuthUsername}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"@!@!@\"\r\n}",
+							"raw": "{\r\n    \"title\": \"ini title\",\r\n    \"description\": \"ini description\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,6 +166,95 @@
 									"key": "id",
 									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{basicAuthPassword}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{basicAuthUsername}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Developer Awam\",\r\n    \"username\": \"restu\",\r\n    \"password\": \"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{basicAuthPassword}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{basicAuthUsername}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"restu\",\r\n    \"password\": \"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
 							]
 						}
 					},
