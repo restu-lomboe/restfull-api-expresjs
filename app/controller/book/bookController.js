@@ -7,7 +7,11 @@ const book = new BookModel();
 
 const getBooks = async (req, res) => {
   const data = await book.getBooks();
-  response.success(res, 200, "success get books", data);
+  const result = {
+    ...data,
+    user: req.user,
+  };
+  response.success(res, 200, "success get books", result);
 };
 
 const addBooks = async (req, res) => {

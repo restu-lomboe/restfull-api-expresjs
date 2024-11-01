@@ -2,12 +2,16 @@ const express = require("express");
 const router = express.Router();
 const bookController = require("../app/controller/book/bookController");
 
-const init = () => {
-  router.get("/", bookController.getBooks);
-  router.post("/", bookController.addBooks);
-  router.put("/:id", bookController.updateBooks);
-  router.patch("/:id", bookController.updateTitleBooks);
-  router.delete("/:id", bookController.deleteBooks);
+const init = (basicAuth, jwtAuth) => {
+  router.get("/", jwtAuth.authenticate, bookController.getBooks);
+  router.post("/", basicAuth.isAuthenticated, bookController.addBooks);
+  router.put("/:id", basicAuth.isAuthenticated, bookController.updateBooks);
+  router.patch(
+    "/:id",
+    basicAuth.isAuthenticated,
+    bookController.updateTitleBooks
+  );
+  router.delete("/:id", basicAuth.isAuthenticated, bookController.deleteBooks);
 
   return router;
 };
